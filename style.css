@@ -1,0 +1,1175 @@
+:root {
+    --bg-main: #08040b; /* Noir très profond teinté de violet */
+    --text-white: #f0f0f0;
+    --accent: #8a2be2; /* Violet électrique */
+    --accent-dim: #3c1361;
+    --gray: #666666;
+
+    --font-display: "Syne", sans-serif;
+    --font-tech: "Space Mono", monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-white);
+    font-family: var(--font-tech); /* Le corps du texte est technique */
+    overflow-x: hidden;
+}
+
+/* JDM Watermark Background */
+.japanese-bg {
+    position: fixed;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    font-family: "Noto Sans JP", sans-serif; /* Fallback font */
+    font-size: 20vh;
+    font-weight: 900;
+    writing-mode: vertical-rl;
+    color: var(--accent);
+    opacity: 0.03;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- NAVIGATION MISE À JOUR --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 50px; /* Un peu plus compact en hauteur */
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background: linear-gradient(
+        to bottom,
+        rgba(8, 4, 11, 0.95) 0%,
+        rgba(8, 4, 11, 0) 100%
+    );
+    backdrop-filter: blur(5px); /* Flou léger derrière le menu */
+    transition: 0.3s;
+}
+
+/* Logo */
+.logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+    color: var(--text-white);
+    flex: 1; /* Pousse le reste */
+}
+.dot {
+    color: var(--accent);
+}
+
+.menu {
+    display: flex;
+    gap: 40px; /* On remet de l'espace car il y a moins de liens */
+    flex: 3;
+    justify-content: center;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #888; /* Gris par défaut */
+    font-family: var(--font-tech);
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Style des numéros : Petit, Violet, Technique */
+.nav-num {
+    font-size: 0.6rem;
+    color: var(--accent);
+    font-family: var(--font-display);
+    padding-bottom: 2px; /* Petit ajustement d'alignement */
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+}
+
+/* Effet Hover : Le texte devient blanc, le numéro brille */
+.menu a:hover {
+    color: white;
+}
+.menu a:hover .nav-num {
+    text-shadow: 0 0 5px var(--accent);
+    border-bottom: 1px solid var(--accent);
+}
+
+/* Mise en valeur du lien BUILD (Le plus important) */
+.highlight-link {
+    color: var(--text-white) !important;
+}
+
+/* Actions à droite (Boutique) */
+.nav-actions {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-shop {
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 25px;
+    color: var(--text-white);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-shop:hover {
+    border-color: #ff003c; /* Rouge pour la vente */
+    background: rgba(255, 0, 60, 0.1);
+    color: #ff003c;
+    box-shadow: 0 0 15px rgba(255, 0, 60, 0.2);
+}
+
+/* RESPONSIVE (Pour éviter que le menu casse sur petits écrans) */
+@media (max-width: 1024px) {
+    nav {
+        padding: 20px;
+    }
+    .menu {
+        display: none;
+    } /* Cache le menu texte sur tablette/mobile */
+    /* Ici idéalement on ajouterait un menu Burger,
+       mais pour l'instant on garde le logo et le bouton Shop */
+}
+
+/* HERO SECTION */
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+}
+.hero-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%) contrast(1.2); /* Image en noir et blanc par défaut */
+    transition: 1s;
+    z-index: -1;
+    mask-image: linear-gradient(to right, transparent 0%, black 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 100%);
+}
+.hero:hover .hero-image {
+    filter: grayscale(0%) contrast(1.1);
+} /* Couleur au survol */
+
+.hero-container {
+    max-width: 60%;
+    z-index: 2;
+}
+
+.subtitle {
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-size: 0.8rem;
+}
+
+h1.title-reveal {
+    font-family: var(--font-display);
+    font-size: 8rem;
+    line-height: 0.85;
+    font-weight: 800;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+}
+
+.hero-footer {
+    display: flex;
+    gap: 50px;
+    align-items: flex-end;
+}
+
+.label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--gray);
+    margin-bottom: 5px;
+}
+#copy-ip {
+    background: none;
+    border: 1px solid var(--gray);
+    color: var(--text-white);
+    padding: 10px 20px;
+    font-family: var(--font-tech);
+    cursor: pointer;
+    transition: 0.3s;
+}
+#copy-ip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* SECTIONS */
+.section-padding {
+    padding: 150px 60px;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: 100px 1fr; /* Colonne pour texte vertical + contenu */
+    gap: 60px;
+}
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--accent);
+    opacity: 0.5;
+}
+
+.col-right h3 {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    margin-bottom: 40px;
+    line-height: 1.1;
+}
+
+.text-body {
+    max-width: 500px;
+    line-height: 1.8;
+    color: #aaa;
+    margin-bottom: 40px;
+    font-size: 0.95rem;
+}
+
+.specs-list li {
+    list-style: none;
+    border-bottom: 1px solid #222;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    max-width: 500px;
+    color: var(--accent);
+}
+.specs-list span {
+    color: var(--text-white);
+}
+
+/* GALLERY */
+.showcase-header {
+    margin-bottom: 80px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.showcase-header h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+}
+.line {
+    height: 1px;
+    background: #333;
+    flex: 1;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.gallery-item {
+    position: relative;
+    cursor: pointer;
+}
+.up-offset {
+    transform: translateY(-50px);
+} /* Décalage pour effet asymétrique */
+
+.img-wrapper {
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+}
+.img-wrapper img {
+    width: 100%;
+    display: block;
+    transition: transform 0.7s ease;
+    filter: grayscale(1);
+}
+.gallery-item:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.3s;
+    background: rgba(138, 43, 226, 0.2);
+}
+.kanji {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 0 0 20px black;
+}
+.gallery-item:hover .overlay {
+    opacity: 1;
+}
+
+.car-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+}
+.car-class {
+    color: var(--accent);
+}
+
+/* FOOTER / MARQUEE */
+.marquee {
+    background: var(--accent);
+    color: black;
+    overflow: hidden;
+    padding: 10px 0;
+    font-family: var(--font-display);
+    font-weight: bold;
+}
+.track {
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+}
+.content {
+    font-size: 3rem;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.footer-content {
+    padding: 100px 60px;
+    text-align: center;
+}
+.discord-box p {
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    color: var(--gray);
+}
+.btn-discord {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--text-white);
+    text-decoration: none;
+    transition: 0.3s;
+}
+.btn-discord:hover {
+    color: var(--accent);
+}
+.copyright {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: #444;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero {
+        padding: 0 20px;
+        justify-content: center;
+    }
+    .hero-image {
+        width: 100%;
+        opacity: 0.3;
+        mask-image: none;
+    }
+    .hero-container {
+        max-width: 100%;
+        text-align: center;
+    }
+    h1.title-reveal {
+        font-size: 4rem;
+    }
+    .hero-footer {
+        justify-content: center;
+    }
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+    .vertical-text {
+        display: none;
+    }
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+    .up-offset {
+        transform: none;
+    }
+    nav {
+        padding: 20px;
+    }
+    .menu {
+        display: none;
+    }
+}
+
+/* --- DASHBOARD LAYOUT (CÔTE À CÔTE) --- */
+.hero-dashboard {
+    display: flex;
+    align-items: flex-end; /* Aligne les éléments en bas */
+    gap: 50px; /* Espace entre le widget et le bouton */
+    margin-top: 40px;
+}
+
+/* Style du Widget Status (Ajusté pour le coté à coté) */
+.sys-telemetry {
+    background: rgba(8, 4, 11, 0.8);
+    border-left: 2px solid var(--accent);
+    padding: 15px;
+    width: 200px; /* Plus compact */
+    backdrop-filter: blur(5px);
+    font-family: "Space Mono", monospace;
+    font-size: 0.75rem;
+}
+
+.telemetry-header {
+    color: #666;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 0.65rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.t-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.t-label {
+    color: #888;
+}
+.t-value {
+    color: var(--text-white);
+    font-weight: bold;
+}
+
+/* Style Online */
+.status-online {
+    color: #00ff88;
+    text-shadow: 0 0 5px #00ff88;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.blink-dot {
+    width: 5px;
+    height: 5px;
+    background: #00ff88;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+/* Barre de progression compacte */
+.progress-bg {
+    width: 100%;
+    height: 2px;
+    background: #333;
+    margin-top: 2px;
+}
+.progress-fill {
+    height: 100%;
+    background: var(--accent);
+    box-shadow: 0 0 5px var(--accent);
+}
+
+/* --- IP MODULE (Le bouton à droite) --- */
+.ip-module {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.ip-module .label {
+    font-size: 0.65rem;
+    color: var(--gray);
+    margin-bottom: 8px;
+    font-family: "Space Mono", monospace;
+    letter-spacing: 1px;
+}
+
+#copy-ip {
+    background: transparent;
+    border: 1px solid #333;
+    display: flex;
+    align-items: stretch; /* Étire les enfants */
+    padding: 0;
+    cursor: pointer;
+    transition: 0.3s;
+    height: 45px; /* Hauteur fixe pour s'aligner avec le design */
+}
+
+.ip-text {
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    color: var(--text-white);
+    font-family: "Space Mono", monospace;
+    font-size: 0.9rem;
+}
+
+.icon-box {
+    background: #333;
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    transition: 0.3s;
+}
+
+/* Effet Hover sur le bouton */
+#copy-ip:hover {
+    border-color: var(--accent);
+}
+#copy-ip:hover .ip-text {
+    color: var(--accent);
+}
+#copy-ip:hover .icon-box {
+    background: var(--accent);
+    color: black;
+}
+
+/* RESPONSIVE : Sur mobile, on remet en colonne */
+@media (max-width: 768px) {
+    .hero-dashboard {
+        flex-direction: column; /* Empile les éléments */
+        align-items: flex-start;
+    }
+    .sys-telemetry,
+    #copy-ip {
+        width: 100%; /* Prend toute la largeur sur mobile */
+    }
+}
+
+/* Styles additionnels pour le status */
+
+/* ONLINE (Vert) */
+.status-online {
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* OFFLINE (Rouge) */
+.status-offline {
+    color: #ff003c;
+    text-shadow: 0 0 10px rgba(255, 0, 60, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Points animés */
+.blink-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #00ff88;
+    border-radius: 50%;
+    animation: pulse-green 2s infinite;
+}
+
+.red-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #ff003c;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #ff003c;
+}
+
+/* Animation Pulse */
+@keyframes pulse-green {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 5px rgba(0, 255, 136, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 136, 0);
+    }
+}
+
+.compare-container {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Hauteur de la zone */
+    overflow: hidden;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+}
+
+/* Gestion des images */
+.img-layer-after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.img-layer-before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%; /* Largeur initiale */
+    height: 100%;
+    overflow: hidden; /* C'est ici que la magie opère (ça coupe l'image) */
+    border-right: 2px solid var(--accent);
+    z-index: 2;
+}
+
+/* Cette classe assure que l'image remplit la hauteur sans se déformer */
+.fit-img {
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* L'image intérieure doit ignorer la largeur de son parent coupé */
+#fixedImage {
+    width: 100vw; /* Force l'image à être large comme l'écran (ou géré par JS) */
+    max-width: none;
+}
+
+/* Slider et Bouton (inchangés) */
+.compare-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: ew-resize;
+    z-index: 10;
+}
+.slider-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    color: black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 5;
+    box-shadow: 0 0 20px var(--accent);
+}
+.compare-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Space Mono", monospace;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.compare-container {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Hauteur fixe importante */
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+/* Calques */
+.img-layer-after,
+.img-layer-before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.img-layer-after {
+    width: 100%;
+} /* Le fond prend tout */
+.img-layer-before {
+    width: 50%;
+    border-right: 2px solid var(--accent);
+    z-index: 2;
+} /* Le dessus est coupé */
+
+/* Style commun aux deux images */
+.fit-img {
+    height: 100%;
+    object-fit: cover; /* Remplit la hauteur sans déformer */
+    object-position: center; /* Centre l'image */
+    display: block;
+    max-width: none; /* Important pour que le JS puisse l'étirer */
+}
+
+/* --- ROSTER GRID --- */
+.roster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    perspective: 1000px; /* Pour un petit effet 3D si on veut */
+}
+
+.driver-card {
+    background: rgba(10, 10, 10, 0.6);
+    border: 1px solid #333;
+    position: relative;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    /* Effet de verre */
+    backdrop-filter: blur(10px);
+}
+
+.driver-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+/* --- VISUALS --- */
+.card-visual {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #333;
+}
+
+.card-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+    filter: grayscale(100%) contrast(1.1);
+}
+
+.driver-card:hover .card-visual img {
+    filter: grayscale(0%) contrast(1);
+    transform: scale(1.1);
+}
+
+.overlay-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, rgba(8, 4, 11, 1), transparent);
+}
+
+/* --- BADGES & RANKS --- */
+.rank-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.2rem;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #555;
+    color: white;
+    z-index: 5;
+}
+
+/* Couleurs spécifiques selon le rang */
+.rank-legend .rank-badge {
+    border-color: #ffd700;
+    color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+.rank-legend:hover {
+    border-color: #ffd700;
+}
+
+.rank-wanted .rank-badge {
+    border-color: #ff003c;
+    color: #ff003c;
+    box-shadow: 0 0 10px rgba(255, 0, 60, 0.3);
+}
+.rank-wanted:hover {
+    border-color: #ff003c;
+}
+
+.rank-elite .rank-badge {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+}
+.rank-elite:hover {
+    border-color: var(--accent);
+}
+
+/* --- BOUNTY BANNER (Wanted Only) --- */
+.bounty-banner {
+    position: absolute;
+    top: 20px;
+    left: -30px;
+    background: #ff003c;
+    color: black;
+    font-family: var(--font-tech);
+    font-weight: bold;
+    font-size: 0.7rem;
+    padding: 5px 30px;
+    transform: rotate(-45deg);
+    z-index: 5;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* --- DATA SECTION --- */
+.card-data {
+    padding: 20px;
+    font-family: var(--font-tech);
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+.header-row h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--text-white);
+}
+.crew-tag {
+    font-size: 0.7rem;
+    color: #666;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 15px 0;
+    margin-bottom: 15px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+.stat .label {
+    font-size: 0.6rem;
+    color: #666;
+    margin-bottom: 3px;
+}
+.stat .value {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.value.online {
+    color: #00ff88;
+    text-shadow: 0 0 5px rgba(0, 255, 136, 0.4);
+}
+.value.offline {
+    color: #444;
+}
+
+.specialty {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* --- MARKETPLACE --- */
+.drop-timer {
+    text-align: right;
+    font-family: var(--font-tech);
+}
+.drop-timer span {
+    font-size: 0.7rem;
+    color: #666;
+    display: block;
+    margin-bottom: 5px;
+}
+.time-display {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+}
+
+/* Scroll Horizontal */
+.scrolling-wrapper {
+    display: flex;
+    overflow-x: auto;
+    gap: 30px;
+    padding-bottom: 20px; /* Place pour la scrollbar */
+    /* Masquer la scrollbar native pour le style */
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) #111;
+}
+
+.market-card {
+    flex: 0 0 300px; /* Largeur fixe des cartes */
+    background: #08040b;
+    border: 1px solid #333;
+    transition: 0.3s;
+}
+.market-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+}
+
+/* Image Area */
+.card-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+.market-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Badges de stock */
+.stock-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: black;
+    font-family: var(--font-tech);
+    z-index: 5;
+}
+.stock-badge.limited {
+    background: #ff9f43;
+}
+.stock-badge.out {
+    background: #ff003c;
+    color: white;
+}
+.stock-badge.fresh {
+    background: #00ff88;
+}
+.stock-badge.crypto {
+    background: #9d4edd;
+    color: white;
+}
+
+/* Effet Sold Out */
+.sold-out {
+    opacity: 0.6;
+    pointer-events: none;
+}
+.sold-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    border: 3px solid #ff003c;
+    color: #ff003c;
+    font-size: 2rem;
+    font-weight: 900;
+    padding: 10px 20px;
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px black;
+}
+
+/* Details */
+.card-details {
+    padding: 20px;
+}
+.card-details h4 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.brand {
+    font-size: 0.7rem;
+    color: #666;
+    margin-top: 2px;
+    font-family: var(--font-tech);
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-family: var(--font-tech);
+}
+.price {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+}
+.crypto-text {
+    color: #9d4edd;
+    text-shadow: 0 0 5px #9d4edd;
+}
+.class-tag {
+    font-size: 0.7rem;
+    border: 1px solid #444;
+    padding: 2px 5px;
+    color: #888;
+}
+
+.btn-buy {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--font-tech);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-buy:hover {
+    background: var(--accent);
+    color: black;
+}
+.market-card.sold-out .btn-buy {
+    border-color: #333;
+    color: #333;
+}
+
+.career-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    height: 400px;
+}
+.career-card {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.career-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%) brightness(0.4);
+    transition: 0.5s;
+}
+.career-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+.icon-large {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+.career-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+.career-card p {
+    font-size: 0.9rem;
+    color: #aaa;
+    max-width: 80%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s;
+}
+
+/* Hover Effects */
+.career-card:hover {
+    border-color: var(--accent);
+}
+.career-card:hover .career-bg {
+    filter: grayscale(0%) brightness(0.6);
+    transform: scale(1.1);
+}
+.career-card:hover p {
+    opacity: 1;
+    transform: translateY(0);
+}
+.career-card:hover .icon-large {
+    transform: scale(1.2);
+    color: white;
+}

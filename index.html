@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>RONIN | FiveM Automotive Society</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <!-- Police 'Syne' pour les titres artistiques, 'Space Mono' pour le coté technique -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <!-- Watermark JDM en fond (signifie "Société Automobile") -->
+        <div class="japanese-bg">自動車社会</div>
+
+        <!-- Navigation minimaliste -->
+        <nav>
+            <div class="logo">RONIN<span class="dot">.</span></div>
+
+            <div class="menu">
+                <!-- Lien vers le concept -->
+                <a href="#manifesto"> <span class="nav-num">01</span> SPECS </a>
+
+                <!-- Lien vers le comparateur (Vital !) -->
+                <a href="#tuning" class="highlight-link">
+                    <span class="nav-num">02</span> BUILD
+                </a>
+
+                <!-- Lien vers la carrière/roster -->
+                <a href="#career"> <span class="nav-num">03</span> CAREER </a>
+
+                <!-- Lien vers les drops -->
+                <a href="#showroom"> <span class="nav-num">04</span> MARKET </a>
+            </div>
+
+            <div class="nav-actions">
+                <a
+                    href="https://ton-tebex.com"
+                    target="_blank"
+                    class="btn-shop"
+                >
+                    STORE <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-container">
+                <p class="subtitle">EST. 2025 // TOKYO X LOS SANTOS</p>
+                <h1 class="title-reveal">NIGHT<br />RUNNER</h1>
+
+                <!-- NOUVEAU CONTENEUR CÔTE À CÔTE -->
+                <div class="hero-dashboard">
+                    <!-- WIDGET STATUS (Gauche) -->
+                    <!-- REMPLACE 'q85vo7' PAR TON VRAI CODE CFX CI-DESSOUS -->
+                    <div
+                        class="sys-telemetry"
+                        id="server-widget"
+                        data-cfx="4kd5jv"
+                    >
+                        <div class="telemetry-header">
+                            <i class="fas fa-signal"></i> SYSTEM //
+                            <span id="server-name">LOADING...</span>
+                        </div>
+                        <div class="telemetry-grid">
+                            <div class="t-row">
+                                <span class="t-label">STATUS</span>
+                                <!-- Par défaut en "CHECKING..." -->
+                                <span class="t-value" id="server-status"
+                                    >CHECKING...</span
+                                >
+                            </div>
+                            <div class="t-row">
+                                <span class="t-label">DRIVERS</span>
+                                <span class="t-value" id="player-count"
+                                    >-- / --</span
+                                >
+                            </div>
+                            <div class="t-row">
+                                <div class="progress-bg">
+                                    <div
+                                        class="progress-fill"
+                                        id="player-fill"
+                                        style="width: 0%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <!-- Ajout de la ligne Ping (Calculé via l'API) -->
+                            <div class="t-row" style="margin-top: 5px">
+                                <span class="t-label">API LATENCY</span>
+                                <span
+                                    class="t-value mono-digit"
+                                    id="server-ping"
+                                    >-- ms</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. BOUTON ADRESSE IP (Droite) -->
+                    <div class="ip-module">
+                        <span class="label">SERVER ACCESS KEY</span>
+                        <button
+                            id="copy-ip"
+                            data-ip="connect cfx.re/join/ton-ip"
+                        >
+                            <span class="ip-text">play.ronin.gg</span>
+                            <div class="icon-box">
+                                <i class="fas fa-copy"></i>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="scroll-indicator">SCROLL <span>↓</span></div>
+                </div>
+                <!-- Fin hero-dashboard -->
+            </div>
+
+            <!-- Image de fond -->
+            <div
+                class="hero-image"
+                style="
+                    background-image: url(&quot;https://images.unsplash.com/photo-1621803268246-b16d034f9d7c?q=80&w=1920&quot;);
+                "
+            ></div>
+        </header>
+
+        <!-- Manifesto (Le Concept) -->
+        <section id="manifesto" class="section-padding">
+            <div class="grid-layout">
+                <div class="col-left">
+                    <h2 class="vertical-text">美学</h2>
+                    <!-- "Esthétique" -->
+                </div>
+                <div class="col-right">
+                    <h3>NOT JUST DRIVING.<br />IT'S AN ART FORM.</h3>
+                    <p class="text-body">
+                        Nous nous éloignons du chaos pour nous concentrer sur
+                        l'essentiel : la machine et la route. Une physique
+                        réaliste, une économie pensée pour les puristes et une
+                        atmosphère inspirée des nuits d'Osaka.
+                    </p>
+                    <ul class="specs-list">
+                        <li><span>HANDLING</span> :: SIMULATION</li>
+                        <li><span>TUNING</span> :: IMPORT PARTS</li>
+                        <li><span>ATMOSPHERE</span> :: WANGAN MIDNIGHT</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="tuning" class="comparison-section section-padding">
+            <div class="showcase-header">
+                <h2>BUILD YOUR LEGEND</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="compare-container" id="compareBox">
+                <!-- CALQUE DU DESSOUS (APRÈS / CUSTOM) -->
+                <div class="img-layer-after">
+                    <!-- J'ai ajouté l'ID 'imgAfter' -->
+                    <img
+                        src="images/cars/elegy_custom.jpeg"
+                        alt="After"
+                        class="fit-img"
+                        id="imgAfter"
+                    />
+                </div>
+
+                <!-- CALQUE DU DESSUS (AVANT / STOCK) -->
+                <div class="img-layer-before" id="clipper">
+                    <!-- J'ai changé l'ID pour 'imgBefore' -->
+                    <img
+                        src="images/cars/elegy_stock.jpeg"
+                        alt="Before"
+                        class="fit-img"
+                        id="imgBefore"
+                    />
+                </div>
+
+                <!-- Slider -->
+                <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                    class="compare-slider"
+                    oninput="moveSlider(this)"
+                />
+                <div class="slider-button" id="sliderBtn">
+                    <i class="fas fa-arrows-alt-h"></i>
+                </div>
+            </div>
+
+            <div class="compare-labels">
+                <span>STOCK VERSION</span>
+                <span>RONIN CUSTOM</span>
+            </div>
+        </section>
+
+        <!-- Showcase (Galerie Minimaliste) -->
+        <section id="showcase" class="section-padding">
+            <div class="showcase-header">
+                <h2>SELECTED BUILDS</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="gallery">
+                <!-- Car 1 -->
+                <div class="gallery-item">
+                    <div class="img-wrapper">
+                        <img
+                            src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1000"
+                            alt="GTR"
+                        />
+                        <div class="overlay">
+                            <span class="kanji">日産</span>
+                        </div>
+                    </div>
+                    <div class="car-details">
+                        <span class="car-name">R35 GT-R [LBWK]</span>
+                        <span class="car-class">CLASS: S+</span>
+                    </div>
+                </div>
+
+                <!-- Car 2 -->
+                <div class="gallery-item up-offset">
+                    <div class="img-wrapper">
+                        <img
+                            src="https://images.unsplash.com/photo-1597687210387-e45e74c4701c?q=80&w=1000"
+                            alt="RX7"
+                        />
+                        <div class="overlay">
+                            <span class="kanji">マツダ</span>
+                        </div>
+                    </div>
+                    <div class="car-details">
+                        <span class="car-name">RX-7 FD3S [RE-AMEMIYA]</span>
+                        <span class="car-class">CLASS: A</span>
+                    </div>
+                </div>
+
+                <!-- Car 3 -->
+                <div class="gallery-item">
+                    <div class="img-wrapper">
+                        <img
+                            src="https://images.unsplash.com/photo-1610825731312-49e6f82c88f5?q=80&w=1000"
+                            alt="Supra"
+                        />
+                        <div class="overlay">
+                            <span class="kanji">トヨタ</span>
+                        </div>
+                    </div>
+                    <div class="car-details">
+                        <span class="car-name">SUPRA MK4 [TOP SECRET]</span>
+                        <span class="car-class">CLASS: S</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="career" class="section-padding">
+            <div class="showcase-header">
+                <h2>CHOOSE YOUR PATH</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="career-grid">
+                <!-- Path 1: Racer -->
+                <div class="career-card">
+                    <div
+                        class="career-bg"
+                        style="
+                            background-image: url(&quot;https://images.unsplash.com/photo-1614200179396-2305638adce9?q=80&w=500&quot;);
+                        "
+                    ></div>
+                    <div class="career-content">
+                        <i class="fas fa-flag-checkered icon-large"></i>
+                        <h3>STREET RACER</h3>
+                        <p>
+                            Touge, Drag, Wangan. Pariez votre carte grise.
+                            Devenez le Roi de la nuit.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Path 2: Tuner -->
+                <div class="career-card">
+                    <div
+                        class="career-bg"
+                        style="
+                            background-image: url(&quot;https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=500&quot;);
+                        "
+                    ></div>
+                    <div class="career-content">
+                        <i class="fas fa-wrench icon-large"></i>
+                        <h3>MASTER MECHANIC</h3>
+                        <p>
+                            Swap moteurs, réglages ECU, Stance. Les légendes se
+                            construisent dans votre garage.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Path 3: Dealer (Illegal) -->
+                <div class="career-card">
+                    <div
+                        class="career-bg"
+                        style="
+                            background-image: url(&quot;https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=500&quot;);
+                        "
+                    ></div>
+                    <div class="career-content">
+                        <i class="fas fa-ship icon-large"></i>
+                        <h3>IMPORT DEALER</h3>
+                        <p>
+                            Gérez les conteneurs au port. Importez des véhicules
+                            exclusifs. Blanchissez l'argent.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roster" class="section-padding">
+            <div class="showcase-header">
+                <h2>HALL OF FAME</h2>
+                <!-- Titre plus glorieux -->
+                <div class="line"></div>
+            </div>
+
+            <div class="roster-grid">
+                <!-- CARTE 1 : THE LEGEND (Style Gold) -->
+                <div class="driver-card rank-legend">
+                    <div class="card-visual">
+                        <img
+                            src="https://images.unsplash.com/photo-1618486650729-01d2c9cb71a4?q=80&w=500"
+                            alt="Driver"
+                        />
+                        <div class="rank-badge">S+</div>
+                        <div class="overlay-gradient"></div>
+                    </div>
+                    <div class="card-data">
+                        <div class="header-row">
+                            <h3>AKIRA_SAN</h3>
+                            <span class="crew-tag">MIDNIGHT CLUB</span>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <span class="label">REP</span>
+                                <span class="value">950K</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">WINS</span>
+                                <span class="value">142</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">CAR</span>
+                                <span class="value">R34 Z-TUNE</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">STATUS</span>
+                                <span class="value online">ONLINE</span>
+                            </div>
+                        </div>
+                        <div class="specialty">SPECIALTY: DOWNHILL DRIFT</div>
+                    </div>
+                </div>
+
+                <!-- CARTE 2 : MOST WANTED (Style Red) -->
+                <div class="driver-card rank-wanted">
+                    <div class="card-visual">
+                        <!-- Effet "Glitch" ou photo sombre -->
+                        <img
+                            src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=500"
+                            alt="Driver"
+                        />
+                        <div class="rank-badge">W</div>
+                        <div class="bounty-banner">WANTED: $500,000</div>
+                        <div class="overlay-gradient"></div>
+                    </div>
+                    <div class="card-data">
+                        <div class="header-row">
+                            <h3>GHOST</h3>
+                            <span class="crew-tag">NO_FACE</span>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <span class="label">KILLS</span>
+                                <span class="value">12</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">ESCAPES</span>
+                                <span class="value">58</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">CAR</span>
+                                <span class="value">HELLCAT</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">STATUS</span>
+                                <span class="value offline">HIDING</span>
+                            </div>
+                        </div>
+                        <div class="specialty">SPECIALTY: HIGHWAY RUNS</div>
+                    </div>
+                </div>
+
+                <!-- CARTE 3 : ELITE (Style Purple - Standard) -->
+                <div class="driver-card rank-elite">
+                    <div class="card-visual">
+                        <img
+                            src="https://images.unsplash.com/photo-1611522258116-6e2b19896744?q=80&w=500"
+                            alt="Driver"
+                        />
+                        <div class="rank-badge">A</div>
+                        <div class="overlay-gradient"></div>
+                    </div>
+                    <div class="card-data">
+                        <div class="header-row">
+                            <h3>YUMI_TO</h3>
+                            <span class="crew-tag">STANCE_NATION</span>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <span class="label">REP</span>
+                                <span class="value">420K</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">SHOWS</span>
+                                <span class="value">15</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">CAR</span>
+                                <span class="value">S2000 AP2</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">STATUS</span>
+                                <span class="value online">ONLINE</span>
+                            </div>
+                        </div>
+                        <div class="specialty">SPECIALTY: FITMENT KING</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="showroom" class="section-padding">
+            <div
+                class="showcase-header"
+                style="justify-content: space-between; align-items: flex-end"
+            >
+                <div>
+                    <h2>IMPORT DROPS</h2>
+                    <div class="line" style="width: 100px"></div>
+                </div>
+                <!-- Compte à rebours -->
+                <div class="drop-timer">
+                    <span>NEXT SHIPMENT IN:</span>
+                    <div id="countdown" class="time-display">04:23:12</div>
+                </div>
+            </div>
+
+            <!-- Conteneur Horizontal -->
+            <div class="scrolling-wrapper">
+                <!-- Voiture 1 : Disponible -->
+                <div class="market-card">
+                    <div class="card-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?q=80&w=500"
+                            alt="Car"
+                        />
+                        <div class="stock-badge limited">3 LEFT</div>
+                    </div>
+                    <div class="card-details">
+                        <h4>
+                            LAMBO HURACAN
+                            <span class="brand">LIBERTY WALK</span>
+                        </h4>
+                        <div class="price-row">
+                            <span class="price">$450,000</span>
+                            <span class="class-tag">CLASS S+</span>
+                        </div>
+                        <button class="btn-buy">INSPECT ON SERVER</button>
+                    </div>
+                </div>
+
+                <!-- Voiture 2 : Sold Out (Créer l'envie) -->
+                <div class="market-card sold-out">
+                    <div class="card-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1597687210387-e45e74c4701c?q=80&w=500"
+                            alt="Car"
+                        />
+                        <div class="stock-badge out">SOLD OUT</div>
+                        <div class="sold-overlay">VENDU</div>
+                    </div>
+                    <div class="card-details">
+                        <h4>MAZDA RX7 <span class="brand">SPIRIT-R</span></h4>
+                        <div class="price-row">
+                            <span class="price">$120,000</span>
+                            <span class="class-tag">CLASS A</span>
+                        </div>
+                        <button class="btn-buy" disabled>UNAVAILABLE</button>
+                    </div>
+                </div>
+
+                <!-- Voiture 3 : Disponible -->
+                <div class="market-card">
+                    <div class="card-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1610825731312-49e6f82c88f5?q=80&w=500"
+                            alt="Car"
+                        />
+                        <div class="stock-badge fresh">NEW ARRIVAL</div>
+                    </div>
+                    <div class="card-details">
+                        <h4>TOYOTA SUPRA <span class="brand">PANDEM</span></h4>
+                        <div class="price-row">
+                            <span class="price">$210,000</span>
+                            <span class="class-tag">CLASS S</span>
+                        </div>
+                        <button class="btn-buy">INSPECT ON SERVER</button>
+                    </div>
+                </div>
+
+                <!-- Voiture 4 : Crypto Only -->
+                <div class="market-card">
+                    <div class="card-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1566008885218-90abf9200ddb?q=80&w=500"
+                            alt="Car"
+                        />
+                        <div class="stock-badge crypto">BLACK MARKET</div>
+                    </div>
+                    <div class="card-details">
+                        <h4>KOENIGSEGG <span class="brand">JESCO</span></h4>
+                        <div class="price-row">
+                            <span class="price crypto-text">25 BTC</span>
+                            <span class="class-tag">CLASS X</span>
+                        </div>
+                        <button class="btn-buy">DARKNET ONLY</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Access (Footer) -->
+        <footer id="join">
+            <div class="marquee">
+                <div class="track">
+                    <div class="content">
+                        &nbsp;JOIN THE SOCIETY ✦ RONIN AUTOMOTIVE ✦ JOIN THE
+                        SOCIETY ✦ RONIN AUTOMOTIVE ✦
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-content">
+                <div class="discord-box">
+                    <p>READY TO START?</p>
+                    <a href="#" class="btn-discord"
+                        >DISCORD ACCESS <i class="fas fa-arrow-right"></i
+                    ></a>
+                </div>
+                <div class="copyright">
+                    <p>© 2025 RONIN.</p>
+                    <p>JDM CULTURE / FIVEM</p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+</html>
