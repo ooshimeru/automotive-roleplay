@@ -1317,6 +1317,75 @@ h2 {
 }
 
 /* --- SYSTEM BOOT LOADER --- */
+/* --- LOGO LOADER (TYPOGRAPHIQUE) --- */
+
+/* 1. Le conteneur qui centre tout */
+.loader-logo {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    width: 100%; /* Prend toute la largeur */
+    margin-bottom: 40px; /* Espace avant le cercle RPM */
+    opacity: 0;
+    animation: fadeUp 0.8s forwards 0.2s;
+}
+
+/* 2. Le style du texte Géant */
+.loader-typo-scale {
+    font-family: "Syne", sans-serif; /* Police artistique */
+    font-weight: 900; /* Très gras */
+    font-size: 5rem; /* Taille énorme (80px) */
+    color: white;
+    letter-spacing: -3px; /* Lettres serrées pour le style */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    position: relative;
+}
+
+/* 3. Le R Violet Glitché */
+.loader-typo-scale .glitch-r {
+    color: var(--accent);
+    text-shadow: 0 0 30px var(--accent); /* Grosse lueur violette */
+    position: relative;
+}
+
+/* 4. Le Tampon Kanji (Carré Blanc) */
+.loader-typo-scale .kanji-stamp {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 1.5rem; /* Taille du Kanji */
+    background: white;
+    color: black;
+    padding: 5px 12px;
+    border-radius: 2px;
+    font-weight: bold;
+    transform: rotate(-5deg); /* Petite rotation stylée */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Lueur blanche */
+    margin-left: 10px;
+    text-shadow: none;
+    letter-spacing: 0;
+}
+
+/* Petit effet de soulignement animé sous le logo */
+.loader-typo-scale::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) skewX(-20deg);
+    width: 0%;
+    height: 4px;
+    background: var(--accent);
+    animation: underline-anim 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.5s;
+}
+
+@keyframes underline-anim {
+    to {
+        width: 100%;
+    }
+}
+
 #loader-wrapper {
     position: fixed;
     top: 0;
