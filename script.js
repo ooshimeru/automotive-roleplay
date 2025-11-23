@@ -214,3 +214,114 @@ function startTimer() {
 
 // Ajouter au chargement
 window.addEventListener("load", startTimer);
+
+// --- CUSTOM CURSOR LOGIC ---
+const cursorDot = document.getElementById("cursor-dot");
+const cursorOutline = document.getElementById("cursor-outline");
+
+window.addEventListener("mousemove", (e) => {
+  const posX = e.clientX;
+  const posY = e.clientY;
+
+  // Le point suit instantanément
+  cursorDot.style.left = `${posX}px`;
+  cursorDot.style.top = `${posY}px`;
+
+  // Le cercle suit avec un petit délai (effet fluide)
+  cursorOutline.animate(
+    {
+      left: `${posX}px`,
+      top: `${posY}px`,
+    },
+    { duration: 500, fill: "forwards" },
+  );
+});
+
+// Agrandir le curseur sur les liens et boutons
+const interactables = document.querySelectorAll(
+  "a, button, input, .map-pin, .career-card",
+);
+interactables.forEach((el) => {
+  el.addEventListener("mouseenter", () =>
+    document.body.classList.add("hovering"),
+  );
+  el.addEventListener("mouseleave", () =>
+    document.body.classList.remove("hovering"),
+  );
+});
+
+const observerOptions = { threshold: 0.15 }; // Se déclenche quand 15% de l'objet est visible
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target); // On arrête d'observer une fois affiché
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
+  observer.observe(el);
+});
+
+/* --- LOADER SEQUENCE --- */
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader-wrapper");
+  const percentText = document.getElementById("loader-percent");
+  const statusText = document.getElementById("loader-text");
+  const rpmCircle = document.querySelector(".rpm-fill");
+
+  // 1. Bloquer le scroll du site pendant le chargement
+  document.body.style.overflow = "hidden";
+  // Remonter en haut de page
+  window.scrollTo(0, 0);
+
+  // 2. Démarrer l'animation du cercle (Barre de progression)
+  // On met un petit délai pour que l'œil voie le début
+  setTimeout(() => {
+    rpmCircle.style.strokeDashoffset = "0"; // Remplit le cercle
+  }, 100);
+
+  // 3. Simuler le comptage 0% -> 100%
+  let count = 0;
+  const counter = setInterval(() => {
+    count++;
+    if (count <= 100) {
+      percentText.innerText = count + "%";
+    } else {
+      clearInterval(counter);
+    }
+  }, 20); // Durée totale approx 2 secondes
+
+  // 4. Changer le texte technique
+  const textSteps = [
+    { time: 0, text: "INITIALIZING SYSTEM..." },
+    { time: 800, text: "LOADING ASSETS..." },
+    { time: 1600, text: "CONNECTING TO ECU..." },
+    { time: 2200, text: "SYSTEM READY" },
+  ];
+
+  textSteps.forEach((step) => {
+    setTimeout(() => {
+      statusText.innerText = step.text;
+      // Petit effet de glitch visuel sur le texte (changement de couleur)
+      statusText.style.color =
+        step.text === "SYSTEM READY" ? "#00ff88" : "#666";
+    }, step.time);
+  });
+
+  // 5. Fin du chargement (Disparition)
+  setTimeout(() => {
+    // Ajoute la classe qui fait glisser le loader vers le haut
+    loader.classList.add("loader-hidden");
+
+    // Réactiver le scroll
+    document.body.style.overflow = "visible";
+
+    // Optionnel : Supprimer le loader du DOM après l'animation pour libérer de la mémoire
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 1000);
+  }, 2500); // Le loader reste affiché 2.5 secondes au total
+});

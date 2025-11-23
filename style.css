@@ -15,11 +15,64 @@
     box-sizing: border-box;
 }
 
+/* --- LOGO TYPOGRAPHIQUE RONIN --- */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.ronin-logo {
+    font-family: "Syne", sans-serif; /* Ta police artistique */
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--text-white);
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* La première lettre R avec effet de coupe */
+.glitch-r {
+    color: var(--accent); /* Violet */
+    text-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+    position: relative;
+    display: inline-block;
+}
+
+/* Petit trait de soulignement "Katana" */
+.ronin-logo::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transform: skewX(-20deg);
+}
+
+/* Le Kanji (Sceau Japonais) */
+.kanji-stamp {
+    font-family: "Noto Sans JP", sans-serif; /* Fallback */
+    font-size: 0.9rem;
+    background: var(--text-white);
+    color: black;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: bold;
+    writing-mode: horizontal-tb;
+    letter-spacing: 0;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
 body {
     background-color: var(--bg-main);
     color: var(--text-white);
     font-family: var(--font-tech); /* Le corps du texte est technique */
     overflow-x: hidden;
+    cursor: none; /* Cache le curseur normal */
 }
 
 /* JDM Watermark Background */
@@ -1172,4 +1225,192 @@ h1.title-reveal {
 .career-card:hover .icon-large {
     transform: scale(1.2);
     color: white;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    z-index: 9998;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition:
+        width 0.2s,
+        height 0.2s,
+        background-color 0.2s;
+}
+
+/* État Hover (quand on survole un lien) */
+body.hovering .cursor-outline {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(138, 43, 226, 0.1); /* Lueur violette */
+    border-color: var(--accent);
+}
+
+/* --- SCANLINES OVERLAY --- */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0) 50%,
+        rgba(0, 0, 0, 0.2) 50%,
+        rgba(0, 0, 0, 0.2)
+    );
+    background-size: 100% 4px; /* Taille des lignes */
+    z-index: 9990;
+    pointer-events: none; /* Laisse passer les clics */
+    opacity: 0.6;
+}
+
+/* État initial (Caché et plus bas) */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); /* Animation fluide */
+}
+
+/* État final (Visible et en place) */
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animation de lueur */
+@keyframes neon-pulse {
+    0%,
+    100% {
+        text-shadow: 0 0 10px rgba(138, 43, 226, 0.2);
+    }
+    50% {
+        text-shadow:
+            0 0 20px rgba(138, 43, 226, 0.6),
+            0 0 5px white;
+    }
+}
+
+h2 {
+    /* Applique l'animation */
+    animation: neon-pulse 3s infinite alternate;
+}
+
+/* --- SYSTEM BOOT LOADER --- */
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #05020a; /* Noir profond */
+    z-index: 99999; /* Au-dessus de tout, même du curseur */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); /* Effet "Rideau" qui monte */
+}
+
+/* Une fois chargé, on ajoute cette classe pour le faire disparaître */
+.loader-hidden {
+    transform: translateY(-100%); /* Le loader part vers le haut */
+}
+
+.loader-content {
+    text-align: center;
+    font-family: var(--font-tech);
+    position: relative;
+}
+
+.loader-logo {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+    opacity: 0;
+    animation: fadeUp 0.5s forwards 0.2s;
+}
+
+/* Conteneur du cercle */
+.rpm-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px auto;
+}
+
+/* SVG Cercle */
+.rpm-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg); /* Commence en haut */
+}
+
+.rpm-bg {
+    fill: none;
+    stroke: #222;
+    stroke-width: 4;
+}
+
+.rpm-fill {
+    fill: none;
+    stroke: var(--accent); /* Violet */
+    stroke-width: 4;
+    stroke-dasharray: 283; /* Circonférence (2 * pi * 45) */
+    stroke-dashoffset: 283; /* Commence vide */
+    transition: stroke-dashoffset 2.5s cubic-bezier(0.2, 0.8, 0.2, 1); /* Animation de remplissage */
+    filter: drop-shadow(0 0 10px var(--accent));
+}
+
+/* Texte pourcentage au milieu */
+.loader-percent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+}
+
+/* Texte technique en bas */
+.loader-text {
+    color: #666;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

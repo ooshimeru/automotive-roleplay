@@ -17,12 +17,41 @@
         />
     </head>
     <body>
+        <body>
+            <!-- LOADER SCREEN -->
+            <div id="loader-wrapper">
+                <div class="loader-content">
+                    <!-- Logo au centre -->
+                    <div class="loader-logo">RONIN<span class="dot">.</span></div>
+
+                    <!-- Cercle RPM (SVG animé) -->
+                    <div class="rpm-container">
+                        <svg class="rpm-svg" viewBox="0 0 100 100">
+                            <circle class="rpm-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="rpm-fill" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <!-- Pourcentage au milieu -->
+                        <div class="loader-percent" id="loader-percent">0%</div>
+                    </div>
+
+                    <!-- Texte technique qui change -->
+                    <div class="loader-text" id="loader-text">INITIALIZING SYSTEM...</div>
+                </div>
+            </div>
+
+            <!-- ... Le reste de ton site ... -->
+        <div class="scanlines"></div>
         <!-- Watermark JDM en fond (signifie "Société Automobile") -->
         <div class="japanese-bg">自動車社会</div>
 
         <!-- Navigation minimaliste -->
         <nav>
-            <div class="logo">RONIN<span class="dot">.</span></div>
+            <div class="logo-container">
+                <div class="ronin-logo">
+                    <span class="glitch-r">R</span>ONIN
+                    <span class="kanji-stamp">浪人</span>
+                </div>
+            </div>
 
             <div class="menu">
                 <!-- Lien vers le concept -->
@@ -162,7 +191,7 @@
                 <div class="line"></div>
             </div>
 
-            <div class="compare-container" id="compareBox">
+            <div class="compare-container reveal-on-scroll" id="compareBox">
                 <!-- CALQUE DU DESSOUS (APRÈS / CUSTOM) -->
                 <div class="img-layer-after">
                     <!-- J'ai ajouté l'ID 'imgAfter' -->
@@ -274,7 +303,7 @@
 
             <div class="career-grid">
                 <!-- Path 1: Racer -->
-                <div class="career-card">
+                <div class="career-card reveal-on-scroll">
                     <div
                         class="career-bg"
                         style="
@@ -292,7 +321,10 @@
                 </div>
 
                 <!-- Path 2: Tuner -->
-                <div class="career-card">
+                <div
+                    class="career-card reveal-on-scroll"
+                    style="transition-delay: 0.1s"
+                >
                     <div
                         class="career-bg"
                         style="
@@ -310,7 +342,10 @@
                 </div>
 
                 <!-- Path 3: Dealer (Illegal) -->
-                <div class="career-card">
+                <div
+                    class="career-card reveal-on-scroll"
+                    style="transition-delay: 0.2s"
+                >
                     <div
                         class="career-bg"
                         style="
@@ -338,7 +373,7 @@
 
             <div class="roster-grid">
                 <!-- CARTE 1 : THE LEGEND (Style Gold) -->
-                <div class="driver-card rank-legend">
+                <div class="driver-card rank-legend reveal-on-scroll">
                     <div class="card-visual">
                         <img
                             src="https://images.unsplash.com/photo-1618486650729-01d2c9cb71a4?q=80&w=500"
@@ -375,7 +410,10 @@
                 </div>
 
                 <!-- CARTE 2 : MOST WANTED (Style Red) -->
-                <div class="driver-card rank-wanted">
+                <div
+                    class="driver-card rank-wanted reveal-on-scroll"
+                    style="transition-delay: 0.1s"
+                >
                     <div class="card-visual">
                         <!-- Effet "Glitch" ou photo sombre -->
                         <img
@@ -414,7 +452,10 @@
                 </div>
 
                 <!-- CARTE 3 : ELITE (Style Purple - Standard) -->
-                <div class="driver-card rank-elite">
+                <div
+                    class="driver-card rank-elite reveal-on-scroll"
+                    style="transition-delay: 0.2s"
+                >
                     <div class="card-visual">
                         <img
                             src="https://images.unsplash.com/photo-1611522258116-6e2b19896744?q=80&w=500"
@@ -469,7 +510,7 @@
             </div>
 
             <!-- Conteneur Horizontal -->
-            <div class="scrolling-wrapper">
+            <div class="scrolling-wrapper reveal-on-scroll">
                 <!-- Voiture 1 : Disponible -->
                 <div class="market-card">
                     <div class="card-image">
@@ -576,6 +617,9 @@
                 </div>
             </div>
         </footer>
+        <!-- Curseur Custom -->
+        <div class="cursor-dot" id="cursor-dot"></div>
+        <div class="cursor-outline" id="cursor-outline"></div>
 
         <script src="script.js"></script>
     </body>
